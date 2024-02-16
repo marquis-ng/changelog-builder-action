@@ -42,3 +42,4 @@ To learn more about Conventional Commits, visit the [Conventional Commits websit
 | Parameters | Description |
 | --- | --- |
 | `changelog` | The resulting changelog |
+| `compare-url` | The URL of the compare page |
