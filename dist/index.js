@@ -31817,6 +31817,8 @@ async function main() {
     const token = core.getInput("token");
     let baseRef = core.getInput("base-ref");
     let headRef = core.getInput("head-ref");
+    const excludeTypes = new Set(core.getInput("exclude-types").split(",").filter((type) => type !== ""));
+    const onlyTypes = new Set(core.getInput("only-types").split(",").filter((type) => type !== ""));
     const octokit = github.getOctokit(token);
 
     if (!baseRef) {
@@ -31857,7 +31859,9 @@ async function main() {
 
     let commitsByType = {};
     for (const type of Object.keys(types)) {
-        commitsByType[type] = [];
+        if (!excludeTypes.has(type) && (onlyTypes.size === 0 || onlyTypes.has(type))) {
+            commitsByType[type] = [];
+        }
     }
 
     for (const commitData of compareData.data.commits) {

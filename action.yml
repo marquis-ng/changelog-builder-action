@@ -17,6 +17,16 @@ inputs:
     required: false
     default:
 
+  exclude-types:
+    description: A comma-delimited string of types to exclude
+    required: false
+    default: docs,style,build
+
+  only-types:
+    description: A comma-delimited string of types to include
+    required: false
+    default:
+
 outputs:
   changelog:
     description: The resulting changelog
