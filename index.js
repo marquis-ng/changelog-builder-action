@@ -66,7 +66,7 @@ async function main() {
         try {
             const ast = cc.toConventionalChangelogFormat(cc.parser(commitData.commit.message));
             if (commitsByType[ast.type] === undefined) {
-                new Error(`Invalid commit type: ${ast.type}`);
+                throw new Error(`Invalid commit type: ${ast.type}`);
             }
 
             const commit = {
