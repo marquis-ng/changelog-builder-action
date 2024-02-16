@@ -25,7 +25,10 @@ jobs:
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
-          body: ${{ steps.changelog.outputs.changelog }}
+          body: |
+            ${{ steps.changelog.outputs.compare-url }}
+
+            ${{ steps.changelog.outputs.changelog }}
 
       - name: Create Tag Aliases
         env:
