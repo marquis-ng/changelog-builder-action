@@ -31852,6 +31852,9 @@ async function main() {
     core.info(JSON.stringify(compareData, null, 2));
     core.endGroup();
 
+    core.setOutput("compare-url", compareData.data.html_url);
+    core.info(`Compare URL: ${compareData.data.html_url}`);
+
     let commitsByType = {};
     for (const type of Object.keys(types)) {
         commitsByType[type] = [];

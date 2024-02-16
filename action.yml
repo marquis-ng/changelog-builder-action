@@ -21,6 +21,9 @@ outputs:
   changelog:
     description: The resulting changelog
 
+  compare-url:
+    description: The URL of the compare page
+
 runs:
   using: node20
   main: dist/index.js
