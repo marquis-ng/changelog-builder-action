@@ -2,7 +2,10 @@
   "name": "changelog-builder-action",
   "version": "0.0.0",
   "description": "GitHub Action that builds a changelog by comparing two refs.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build index.js -o dist"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marquis-ng/changelog-builder-action.git"
@@ -17,5 +20,8 @@
     "@actions/core": "^1.10.1",
     "@actions/github": "^6.0.0",
     "@conventional-commits/parser": "^0.4.1"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.1"
   }
 }
