@@ -39,6 +39,7 @@ To learn more about Conventional Commits, visit the [Conventional Commits websit
 | `head-ref` | The head reference name | The hash of the commit that triggered the workflow |
 | `exclude-types`¹ | A comma-delimited string of `<type>`s to exclude | `docs,style,build` |
 | `include-types`¹ | A comma-delimited string of `<type>`s to include | An empty string² |
+| `exclude-scopes` | A newline-delimited string of `[scope]`s to exclude | An empty string |
 
 1: `exclude-types` takes precedence over `include-types`. To avoid confusion, set `exclude-types` to an empty string when using `include-types`.
 
