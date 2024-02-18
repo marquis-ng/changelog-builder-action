@@ -27,6 +27,11 @@ inputs:
     required: false
     default:
 
+  exclude-scopes:
+    description: A newline-delimited string of scopes to exclude
+    required: false
+    default:
+
 outputs:
   changelog:
     description: The resulting changelog

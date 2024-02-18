@@ -23,6 +23,7 @@ async function main() {
     let headRef = core.getInput("head-ref");
     const excludeTypes = new Set(core.getInput("exclude-types").split(",").filter((type) => type !== ""));
     const onlyTypes = new Set(core.getInput("only-types").split(",").filter((type) => type !== ""));
+    const excludeScopes = new Set(core.getInput("exclude-scopes").split("\n").filter((scope) => scope !== ""));
     const octokit = github.getOctokit(token);
 
     if (!baseRef) {
@@ -74,6 +75,8 @@ async function main() {
             const ast = cc.toConventionalChangelogFormat(cc.parser(commitData.commit.message));
             if (commitsByType[ast.type] === undefined) {
                 throw new Error(`Invalid commit type: ${ast.type}`);
+            } else if (excludeScopes.has(ast.scope)) {
+                throw new Error(`Excluded commit scope: ${ast.scope}`);
             }
 
             const commit = {
