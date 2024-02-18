@@ -31852,7 +31852,7 @@ async function main() {
         core.setFailed(`Couldn't compare commits (status ${compareData.status}).`);
     }
 
-    core.info(`${compareData.data.total_commits} commits found.`)
+    core.info(`${compareData.data.total_commits} commits found.`);
     core.startGroup("Compare data");
     core.info(JSON.stringify(compareData, null, 2));
     core.endGroup();
@@ -31860,7 +31860,7 @@ async function main() {
     core.setOutput("compare-url", compareData.data.html_url);
     core.info(`Compare URL: ${compareData.data.html_url}`);
 
-    let commitsByType = {};
+    const commitsByType = {};
     for (const type of Object.keys(types)) {
         if (!excludeTypes.has(type) && (onlyTypes.size === 0 || onlyTypes.has(type))) {
             commitsByType[type] = [];
@@ -31893,38 +31893,38 @@ async function main() {
         }
     }
 
-    let changelog_lines = [];
+    const changelogLines = [];
     for (const type of typeOrder) {
         if (commitsByType[type] === undefined || commitsByType[type].length === 0) {
             continue;
         }
 
-        let changelog_title_line = [];
+        const changelogTitleLine = [];
         if (showIcons) {
-            changelog_title_line.push(types[type].icon);
+            changelogTitleLine.push(types[type].icon);
         }
-        changelog_title_line.push(types[type].title);
+        changelogTitleLine.push(types[type].title);
 
-        changelog_lines.push(`### ${changelog_title_line.join(" ")}`);
+        changelogLines.push(`### ${changelogTitleLine.join(" ")}`);
 
         for (const commit of commitsByType[type]) {
-            let changelog_line = [];
+            const changelogLine = [];
             if (commit.scope !== null) {
-                changelog_line.push(`**${commit.scope}**:`);
+                changelogLine.push(`**${commit.scope}**:`);
             }
-            changelog_line.push(commit.subject);
-            changelog_line.push(commit.sha);
+            changelogLine.push(commit.subject);
+            changelogLine.push(commit.sha);
             if (mentionAuthors) {
-                changelog_line.push(`@${commit.author}`);
+                changelogLine.push(`@${commit.author}`);
             }
 
-            changelog_lines.push(`- ${changelog_line.join(" ")}`);
+            changelogLines.push(`- ${changelogLine.join(" ")}`);
         }
 
-        changelog_lines.push("");
+        changelogLines.push("");
     }
 
-    const changelog = changelog_lines.join("\n");
+    const changelog = changelogLines.join("\n");
     core.setOutput("changelog", changelog);
 
     core.startGroup("Changelog");
