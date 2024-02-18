@@ -40,6 +40,8 @@ To learn more about Conventional Commits, visit the [Conventional Commits websit
 | `exclude-types`¹ | A comma-delimited string of `<type>`s to exclude | `docs,style,build` |
 | `include-types`¹ | A comma-delimited string of `<type>`s to include | An empty string² |
 | `exclude-scopes` | A newline-delimited string of `[scope]`s to exclude | An empty string |
+| `show-icons` | Whether icons should be shown in the resulting changelog | `true` |
+| `mention-authors` | Whether authors should be mentioned in the resulting changelog | `true` |
 
 1: `exclude-types` takes precedence over `include-types`. To avoid confusion, set `exclude-types` to an empty string when using `include-types`.
 
