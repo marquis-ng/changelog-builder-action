@@ -24,6 +24,8 @@ async function main() {
     const excludeTypes = new Set(core.getInput("exclude-types").split(",").filter((type) => type !== ""));
     const onlyTypes = new Set(core.getInput("only-types").split(",").filter((type) => type !== ""));
     const excludeScopes = new Set(core.getInput("exclude-scopes").split("\n").filter((scope) => scope !== ""));
+    const showIcons = core.getBooleanInput("show-icons");
+    const mentionAuthors = core.getBooleanInput("mention-authors");
     const octokit = github.getOctokit(token);
 
     if (!baseRef) {
@@ -101,7 +103,13 @@ async function main() {
             continue;
         }
 
-        changelog_lines.push(`### ${types[type].icon} ${types[type].title}`);
+        let changelog_title_line = [];
+        if (showIcons) {
+            changelog_title_line.push(types[type].icon);
+        }
+        changelog_title_line.push(types[type].title);
+
+        changelog_lines.push(`### ${changelog_title_line.join(" ")}`);
 
         for (const commit of commitsByType[type]) {
             let changelog_line = [];
@@ -110,7 +118,9 @@ async function main() {
             }
             changelog_line.push(commit.subject);
             changelog_line.push(commit.sha);
-            changelog_line.push(`@${commit.author}`);
+            if (mentionAuthors) {
+                changelog_line.push(`@${commit.author}`);
+            }
 
             changelog_lines.push(`- ${changelog_line.join(" ")}`);
         }

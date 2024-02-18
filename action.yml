@@ -32,6 +32,16 @@ inputs:
     required: false
     default:
 
+  show-icons:
+    description: Whether icons should be shown in the resulting changelog
+    required: false
+    default: true
+
+  mention-authors:
+    description: Whether authors should be mentioned in the resulting changelog
+    required: false
+    default: true
+
 outputs:
   changelog:
     description: The resulting changelog
