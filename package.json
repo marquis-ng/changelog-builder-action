@@ -1,6 +1,6 @@
 {
   "name": "changelog-builder-action",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "GitHub Action that builds a changelog by comparing two refs.",
   "main": "dist/index.js",
   "scripts": {
